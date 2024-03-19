@@ -1,0 +1,26 @@
+{
+  "name": "rest-api-node-mentoring-5",
+  "version": "1.0.0",
+  "description": "rest api project for node mentoring program",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apyd/rest-api-node-mentoring-5.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "nodejs",
+    "typescript",
+    "http"
+  ],
+  "author": "Artur Pydych",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apyd/rest-api-node-mentoring-5/issues"
+  },
+  "homepage": "https://github.com/apyd/rest-api-node-mentoring-5#readme"
+}
