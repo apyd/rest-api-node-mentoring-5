@@ -29,12 +29,10 @@ export const userService = {
   update: (userId: string, updateUserDto: UpdateUserDto): UserHobbies | null => {
     const hobbies = db.get('hobbies')
     const index = hobbies.findIndex(({ id }) => userId === id)
-    console.log(userId, index)
     if(index === -1) {
       return null
     }
     hobbies[index] = { id: userId, hobbies: [...new Set(...hobbies[index].hobbies, updateUserDto.hobbies)]}
-    console.log
     return hobbies[index]
   },
   delete: (userId: string): Boolean => {
