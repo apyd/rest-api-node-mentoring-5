@@ -35,6 +35,7 @@ export const usersController = async (
         const users = userService.getAll();
         const usersWithLinks = users.map(extendUserWithLinks);
         res
+          .setHeader('Cache-Control', 'public, max-age=3600')
           .writeHead(200)
           .end(JSON.stringify({ data: usersWithLinks, error: null }));
         return;
@@ -69,7 +70,10 @@ export const usersController = async (
             hobbies: `/api/users/${userId}/hobbies`,
           },
         };
-        res.writeHead(200).end(JSON.stringify({ data, error: null }));
+        res
+          .setHeader('Cache-Control', 'private, max-age=3600')
+          .writeHead(200)
+          .end(JSON.stringify({ data, error: null }));
         return;
       } catch (error) {
         const errorMessage = getErrorMessage(error);
@@ -133,8 +137,8 @@ export const usersController = async (
         .end(JSON.stringify({ data: {
           hobbies: user.hobbies,
           links: {
-            self: `/api/users/${userId}`,
-            hobbies: `/api/users/${userId}/hobbies`,
+            self: `/api/users/${userId}/hobbies`,
+            user: `/api/users/${userId}`,
           }
         }, error: null }));
       return;
