@@ -5,7 +5,7 @@ export const REQUEST_METHOD = {
   PATCH: 'PATCH',  
 }
 
-export const ROUTES = {
+export const ROUTES: Record<string, string> = {
   users: 'users'
 }
 

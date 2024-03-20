@@ -1,4 +1,4 @@
-import crypto from 'node:crypto'
+import * as crypto from 'node:crypto'
 
 import { db } from '../../db/db.js'
 import { CreateUserDto, UpdateUserDto } from './users.dto.js'
@@ -28,7 +28,7 @@ export const userService = {
   },
   update: (userId: string, updateUserDto: UpdateUserDto): UserHobbies | null => {
     const hobbies = db.get('hobbies')
-    const index = hobbies.findIndex(({ id }) => userId === id)
+    const index = hobbies.findIndex(({ id }: { id: string }) => userId === id)
     if(index === -1) {
       return null
     }
@@ -40,7 +40,7 @@ export const userService = {
     const updatedUsers = users.filter((user: User) => user.id !== userId)
     if(users.length !== updatedUsers.length) {
       db.set('users', updatedUsers)
-      const updatedListOfHobbies = db.get('hobbies').filter(({ id }) => userId !== id)
+      const updatedListOfHobbies = db.get('hobbies').filter(({ id }: { id: string }) => userId !== id)
       db.set('hobbies', updatedListOfHobbies)
     }
     return users.length !== updatedUsers.length

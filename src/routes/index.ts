@@ -1,10 +1,10 @@
-import http from 'http'
+import * as http from 'node:http'
 
 import { usersController } from "../api/users/users.controller.js"
 import { notFoundController } from '../api/common/notFound.controller.js'
 import { validatePath } from "../utils/index.js"
 
-const routingMapper = {
+const routingMapper: Record<string, (req: http.IncomingMessage, res: http.ServerResponse) => Promise<void>> = {
   users: usersController
 }
 
