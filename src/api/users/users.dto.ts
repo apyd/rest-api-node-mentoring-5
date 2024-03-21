@@ -1,4 +1,4 @@
-import { User } from './users.model.js';
+import type { User } from './users.model';
 
 export type CreateUserDto = Pick<User, 'name' | 'email'>
 

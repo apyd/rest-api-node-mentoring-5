@@ -1,8 +1,8 @@
-import * as crypto from 'node:crypto'
+import crypto from 'node:crypto'
 
-import { db } from '../../db/db.js'
-import { CreateUserDto, UpdateUserDto } from './users.dto.js'
-import { User, UserHobbies } from './users.model.js'
+import { db } from '../../db/db'
+import type { CreateUserDto, UpdateUserDto } from './users.dto'
+import type { User, UserHobbies } from './users.model'
 
 export const userService = {
   getAll: (): User[] => {

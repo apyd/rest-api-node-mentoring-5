@@ -1,22 +1,22 @@
-import * as http from "node:http";
+import http from "node:http";
 
-import { userService } from "./users.service.js";
+import { userService } from "./users.service";
 
 import {
   getErrorMessage,
   parseRequestBody,
   validateUUID,
-} from "../../utils/index.js";
+} from "../../utils";
 import {
   extendUserWithLinks,
   validateCreateUserDto,
   validateUpdateUserHobbiesDto,
-} from "./users.utils.js";
+} from "./users.utils";
 
-import { REQUEST_METHOD } from "../../constants/index.js";
+import { REQUEST_METHOD } from "../../constants";
 
-import { CreateUserDto, UpdateUserDto } from "./users.dto.js";
-import { notFoundController } from "../common/notFound.controller.js";
+import type { CreateUserDto, UpdateUserDto } from "./users.dto";
+import { notFoundController } from "../common/notFound.controller";
 
 export const usersController = async (
   req: http.IncomingMessage,
@@ -48,7 +48,7 @@ export const usersController = async (
       }
     }
 
-    if (pathContainsHobbies) {
+    if (pathContainsHobbies && userId) {
       try {
         validateUUID(userId);
         const userHobbies = userService.getHobbies(userId);
@@ -115,7 +115,7 @@ export const usersController = async (
     }
   }
 
-  if (method === REQUEST_METHOD.PATCH && pathContainsHobbies) {
+  if (method === REQUEST_METHOD.PATCH && pathContainsHobbies && userId) {
     try {
       const body = (await parseRequestBody(req)) as UpdateUserDto;
       validateUpdateUserHobbiesDto(body.hobbies);
@@ -151,7 +151,7 @@ export const usersController = async (
     }
   }
 
-  if (method === REQUEST_METHOD.DELETE && pathElements.length === 3) {
+  if (method === REQUEST_METHOD.DELETE && pathElements.length === 3 && userId) {
     try {
       validateUUID(userId);
       const user = userService.delete(userId);

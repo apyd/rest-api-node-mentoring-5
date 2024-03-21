@@ -1,5 +1,5 @@
-import { CreateUserDto } from "./users.dto.js"
-import { User } from "./users.model.js"
+import type { CreateUserDto } from "./users.dto"
+import type { User } from "./users.model"
 
 export const extendUserWithLinks = (user: User) => {
   if(!user) return null

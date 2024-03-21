@@ -1,9 +1,12 @@
-import * as http from 'node:http'
-import { ROUTES } from '../constants/index.js'
+import http from 'node:http'
+import { ROUTES } from '../constants'
 
-export const validatePath = (pathElements: string[]) => {
-  const isPathValid = pathElements?.[0] === 'api' && (ROUTES[pathElements[1]]);
-  return isPathValid;
+export const validateBasePath = (pathElements: string[]) => {
+  if (pathElements[0] && pathElements[1]) {
+    const isPathValid = pathElements[0] === 'api' && (ROUTES[pathElements[1]]);
+    return isPathValid;
+  }
+  return false;
 }
 
 export const parseRequestBody = (req: http.IncomingMessage) => new Promise((resolve, reject) => {

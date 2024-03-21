@@ -1,8 +1,8 @@
-import * as http from 'node:http'
+import http from 'node:http'
 
-import { usersController } from "../api/users/users.controller.js"
-import { notFoundController } from '../api/common/notFound.controller.js'
-import { validatePath } from "../utils/index.js"
+import { usersController } from "../api/users/users.controller"
+import { notFoundController } from '../api/common/notFound.controller'
+import { validateBasePath } from "../utils"
 
 const routingMapper: Record<string, (req: http.IncomingMessage, res: http.ServerResponse) => Promise<void>> = {
   users: usersController
@@ -11,11 +11,12 @@ const routingMapper: Record<string, (req: http.IncomingMessage, res: http.Server
 export const router = async (req: http.IncomingMessage, res: http.ServerResponse) => {
   const path = new URL(req.url!, `http://${req.headers.host}`).pathname
   const pathElements = path?.split('/').filter(pathElement => pathElement) || []
-  const isPathValid = validatePath(pathElements)
-  if (!isPathValid) {
+  const identifier = pathElements?.[1]
+  const isPathValid = validateBasePath(pathElements)
+  if (!isPathValid || !identifier) {
     notFoundController(res)
     return
   }
-  const controller = routingMapper?.[pathElements[1]]
-  await controller(req, res)
+  const controller = routingMapper?.[identifier]
+  controller && await controller(req, res)
 }

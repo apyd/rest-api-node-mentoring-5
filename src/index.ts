@@ -1,5 +1,5 @@
-import * as http from 'node:http';
-import { router } from './routes/index.js';
+import http from 'node:http';
+import { router } from './routes';
 
 const app = http.createServer(async (req: http.IncomingMessage, res: http.ServerResponse) => await router(req, res))
 
