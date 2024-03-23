@@ -2,9 +2,12 @@
   "name": "rest-api-node-mentoring-5",
   "version": "1.0.0",
   "description": "rest api project for node mentoring program",
-  "main": "index.ts",
+  "main": "./src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "tsx --env-file=.env --watch src/index.ts",
+    "start:prod": "pm2 start ecosystem.config.cjs --env production",
+    "stop": "pm2 stop ngmp-network-app",
+    "build": "tsc --build"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,11 @@
   "bugs": {
     "url": "https://github.com/apyd/rest-api-node-mentoring-5/issues"
   },
-  "homepage": "https://github.com/apyd/rest-api-node-mentoring-5#readme"
+  "homepage": "https://github.com/apyd/rest-api-node-mentoring-5#readme",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "^20.11.29",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2"
+  }
 }

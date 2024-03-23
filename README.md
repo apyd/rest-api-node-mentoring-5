@@ -36,3 +36,13 @@ after update: hobbies = ['sport', 'dancing']
 4. Hypermedia links (HATEOAS) are included for:
 - Each user to retrieve their hobbies
 - Get hobbies for a specific user - a reference to the user itself
+
+### Prerequisites
+
+To run application in dev mode use 'npm run start:dev' command
+
+To prepare transpiled to js version of app use 'npm run build' command
+
+To run app in production mode you have to install pm2 package globally and run 'npm run start:prod'.
+
+To stop app running in production mode use command 'npm run stop'
